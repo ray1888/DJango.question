@@ -1,0 +1,43 @@
+.tm {
+	text-align:center-left;
+	background-color:#FFFFFF;
+}
+
+#real {
+	background-color:#FFFFFF;
+	margin: 0px auto;
+}
+
+#test {
+	background:url(/static/img/5.jpg);
+}
+
+#sub1 {
+	text-align:center;
+}
+
+.li_tm {
+	width:30px;
+	margin:2px;
+	padding:4px;
+}
+
+
+.xx_tm_jz {
+	display:inline-block;
+	width:30px;
+	margin:0px;
+	padding:22px;
+}
+
+
+.tm_tm_jz {
+	display:inline-block;
+	width:30px;
+	margin:2px;
+	padding:25px;
+}
+
+ul {
+	list-style:none;
+}

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<link rel="stylesheet" type="text/css"  href="/static/css/xuanran.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>问卷系统：首页</title>
+	<script src="/static/js/jquery-1.11.1.min.js"></script>
+     <!--BOOTSTRAP SCRIPTS PLUGIN-->
+	<script src="/static/js/bootstrap.js"></script>
+     <!--WOW SCRIPTS PLUGIN-->
+    <script src="/static/js/wow.js"></script>
+     <!--FLEXSLIDER SCRIPTS PLUGIN-->
+    <script src="/static/js/jquery.flexslider.js"></script>
+     <!--CUSTOM SCRIPTS -->
+    <script src="/static/js/custom.js"></script>
+	
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="/static/css/index2/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME STYLE  -->
+    <link href="/static/css/index2/font-awesome.css" rel="stylesheet" />
+    <!-- ANIMATE STYLE  -->
+    <link href="/static/css/index2/animate.css" rel="stylesheet" />
+    <!-- FLEXSLIDER STYLE  -->
+    <link href="/static/css/index2/flexslider.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="/static/css/index2/style.css" rel="stylesheet" />
+	<link href="/static/css/xuanran.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS  -->
+    <link href='/static/css/index2/google_font.css' rel='stylesheet' type='text/css' />
+    <link href='/static/css/index2/google_font1.css' rel='stylesheet' type='text/css' />
+	<link href='/static/css/index2/google_font2.css' rel='stylesheet' type='text/css' /> 
+</head>
+
+
+	
+<body>
+	
+	<div class="navbar navbar-inverse set-radius-zero" >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                    <h1>问卷系统</h1>
+            </div>
+            <div class="right-div">
+				<strong>Support : </strong>  xxx@qq.com
+            </div>
+          
+        </div>
+    </div>
+    <!-- LOGO HEADER END-->
+    <section class="menu-section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                            <li><a href="{% url 'index' %}" >首页</a></li>
+                            <li><a href="{% url 'signin' %}">登陆</a></li>        
+                             <li><a href="{% url 'signup' %}">注册</a></li>
+                            <li><a href="{% url 'contact' %}">联系我们</a></li>
+							<li><a href="{% url 'tiqu' %}">查看正在调查的问卷</a></li>
+							{% if  username %}
+							<li><a href="" style="color:#e91e63;">您好!{{ username }}</a></li>		
+							<li><a href="{% url 'houtai' %}">管理后台</a></li>
+							<li><a href="{% url 'logout' %}">登出</a></li>
+							{% endif %}
+                            
+							
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+	
+	
+	<div class="row" id="test">
+		<div class="col-md-3"  >
+			
+		</div>
+		
+		<div class="col-md-6" id="real">
+			<form method="POST" id="big_answer" action="txcg.html?id={{id}}">
+			<div id="answer">
+								
+			<br>
+			<br><br>
+
+			</div>
+			<input type="submit" value="submit" id="sub1" name="sub1">
+			</form>
+		</div>
+		
+		<div class="col-md-3" >
+			
+		</div>
+	
+	</div>
+	
+	
+      <div class="container">
+		<div class="row">
+			<div class="col-lg-12" style="width:100%;">
+			<strong>----------------------------------------------------------------------</strong>
+			</div>
+		</div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+              
+									<h3> <strong>关于本站</strong> </h3>
+									<p style="padding-right:50px;" >
+										并没有什么想说的
+									</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 social-div">
+               
+
+              
+										<h3> <strong>以后可能会放上二维码</strong> </h3>
+                We love to be social,Catch Us On Wechat
+                
+									
+                    
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <h3> <strong>2017年度巨作</strong> </h3>
+                
+            </div>
+        </div>
+	   <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <hr />
+                <div style="text-align:right;padding:5px;">
+                    &copy;2017 by real_ray 
+                </div>
+            </div>
+	   </div>
+	 </div>
+    
+	
+	
+	
+    
+</body>
+
+
+
+<script type="text/javascript">
+     /* 处理表单上传到另外的页面，使用action来进行post数据并且跳转，在html的form元素中进行 */
+	 var timu={{ timu|safe }};
+     var t_id=1;
+     var x_id=0;
+     var s="id"+t_id+"_"+x_id;	 	 
+	 var answer=document.getElementById("answer"); 
+     var selectionarr=["A","B","C","D","E","F","G","H","I","J","K","L"]
+	 var zm_id=0
+	 var Flag=true;
+
+	 
+	 while (Flag){
+		console.log("big loop");
+		if (timu["id"+t_id+"_"+"1"]=="填空"){
+		 	console.log("inner tk");
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+				console.log("tk_tm");
+		 		var title1=document.createElement("p");
+		 		var text_title=document.createTextNode(t_id+"."+timu[q]);
+				var div1=document.createElement("div");
+				div1.setAttribute("class","tm");
+				div1.setAttribute("id","div"+t_id);
+		 		title1.appendChild(text_title);
+		 		//answer.appendChild(title1);
+				div1.appendChild(title1);
+		 		x_id=x_id+2;
+		 	}
+		 	else{
+				console.log("tk_kk");
+				var ul=document.createElement("ul");
+		 		var p=document.createElement("p");
+		 		var text_p=document.createTextNode("请输入答案");
+		 		p.appendChild(text_p);
+				var li=document.createElement("li");
+				li.appendChild(p);
+				ul.appendChild(li);
+		 		var input=document.createElement("input");
+		 		input.setAttribute("id",t_id);
+		 		input.setAttribute("name",t_id);
+		 		//answer.appendChild(p);
+		 		//answer.appendChild(input);
+				li.appendChild(input);
+				ul.appendChild(li);
+		 		//div1.appendChild(p);
+		 		//div1.appendChild(input);
+				div1.appendChild(ul);
+				var p_fg=document.createElement("p");
+				var fg=document.createElement("h2");
+				var fg_text=document.createTextNode("------------------------------------------------------------------------------------");
+				fg.appendChild(fg_text);
+				p_fg.appendChild(fg);
+				div1.appendChild(p_fg);
+				div1.appendChild(document.createElement("br"));
+				answer.appendChild(div1);
+				t_id=t_id+1;
+				x_id=0;
+				console.log("tiankouhou");
+				console.log(t_id+","+x_id);
+		 	};	
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="单选"){
+			console.log("dx")
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+		 		var title1=document.createElement("p");
+		 		var text_title=document.createTextNode(t_id+"."+timu[q]);
+		 		title1.appendChild(text_title);
+				var div1=document.createElement("div");
+				div1.setAttribute("class","tm");
+				div1.setAttribute("id","div"+t_id);
+				div1.appendChild(title1);
+				var ul=document.createElement("ul");
+		 		//answer.appendChild(title1);
+		 		x_id=x_id+2;
+				console.log("dx_tm")
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				console.log("dx_xx");
+				console.log(t_id+"   "+x_id);
+		 		var input=document.createElement("input");
+		 		input.setAttribute("id",t_id);
+		 		input.setAttribute("name",t_id);
+		 		input.setAttribute("value",selectionarr[zm_id]);
+		 		input.type="radio";
+		 		var label=document.createElement("label");
+		 		var text_label=document.createTextNode(timu[q]);
+				var li=document.createElement("li");
+				//li.setAttribute("class","li_tm");
+		 		label.appendChild(input);
+		 		label.appendChild(text_label);
+				li.appendChild(label);
+				ul.appendChild(li);
+				//answer.appendChild(label);
+				//div1.appendChild(label);
+		 		x_id = x_id+1;
+		 		zm_id = zm_id +1;
+				console.log(q);
+		 		
+		 	}
+			
+			else{
+					div1.appendChild(ul);
+					div1.appendChild(document.createElement("br"));
+					var p_fg=document.createElement("p");
+					var fg=document.createElement("h2");
+					var fg_text=document.createTextNode("------------------------------------------------------------------------------------");
+					fg.appendChild(fg_text);
+					p_fg.appendChild(fg);
+					div1.appendChild(p_fg);
+					//var fg_text=document.createTextNode("------------------------------------------------------------------------------------");
+					//fg.appendChild(fg_text);
+					//div1.appendChild(fg);
+					div1.appendChild(document.createElement("br"));
+					answer.appendChild(div1);
+					console.log("下一题");
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="多选"){
+			var q="id"+t_id+"_"+x_id;
+			console.log(t_id+"_"+x_id);
+		 	if (x_id==0){
+				console.log("duox_timu");
+		 		var title1=document.createElement("p");
+		 		var text_title=document.createTextNode(t_id+"."+timu[q]);
+		 		title1.appendChild(text_title);
+				var div1=document.createElement("div");
+				div1.setAttribute("class","tm");
+				div1.setAttribute("id","div"+t_id);
+				div1.appendChild(title1);
+				var ul=document.createElement("ul");
+		 		//answer.appendChild(title1);
+		 		x_id=x_id+2;
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				console.log("duox_xx");
+		 		var input=document.createElement("input");
+		 		input.setAttribute("id",t_id);
+		 		input.setAttribute("name",t_id);
+		 		input.setAttribute("value",selectionarr[zm_id]);
+		 		input.type="checkbox";
+		 		var label=document.createElement("label");
+		 		var text_label=document.createTextNode(timu[q]);
+		 		label.appendChild(input);
+		 		label.appendChild(text_label);
+				var li=document.createElement("li");
+				//li.setAttribute("class","li_tm");
+		 		label.appendChild(input);
+		 		label.appendChild(text_label);
+				li.appendChild(label);
+				ul.appendChild(li);
+				//answer.appendChild(label);
+				//div1.appendChild(label);
+		 		x_id = x_id+1;
+		 		zm_id = zm_id +1;
+		 		
+		 	}
+			
+			else{
+					div1.appendChild(ul);
+					div1.appendChild(document.createElement("br"));
+					//var fg=document.createElement("h2");
+					//var fg_text=document.createTextNode("------------------------------------------------------------------------------------");
+					//fg.appendChild(fg_text);
+					//div1.appendChild(fg);
+					var p_fg=document.createElement("p");
+					var fg=document.createElement("h2");
+					var fg_text=document.createTextNode("------------------------------------------------------------------------------------");
+					fg.appendChild(fg_text);
+					p_fg.appendChild(fg);
+					div1.appendChild(p_fg);
+					div1.appendChild(document.createElement("br"));
+					answer.appendChild(div1);
+					console.log("下一题");
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="矩阵"){
+			console.log("juzhe")
+			console.log(timu);
+			var q="id"+t_id+"_"+x_id;
+			console.log("q:"+q);
+			console.log("xid:"+x_id);
+		 	if(x_id==0 && q in timu){
+				console.log("jz_tm");
+				console.log(q);
+		 		var title1=document.createElement("p");
+		 		var text_title=document.createTextNode(t_id+"."+timu[q]);
+		 		title1.appendChild(text_title);
+				var div1=document.createElement("div");
+				div1.setAttribute("class","tm");
+				div1.setAttribute("id","div"+t_id);
+				div1.appendChild(title1);
+		 		//answer.appendChild(title1);
+		 		x_id=x_id+2;
+				var ul=document.createElement("ul");
+				
+		 		
+		 	}
+			
+			else if(x_id == 2){
+				console.log("option loop");
+				var optionarr=["a","b","c","d","e","f","g","h","i","j","k","l"];
+				//var p_options=document.createElement("p");
+				var max = 0;
+				var inputnum=0;
+				for(var i=1;i<10;i++)
+				{
+					var nn = "id"+t_id+"_"+ (x_id + i - '0');
+					console.log("nn="+nn);
+					if(nn in timu)
+					{
+						console.log("timu[nn]:"+timu[nn].length);
+						max = (max < timu[nn].length)?timu[nn].length:max;
+					}
+					console.log("max="+max);
+				}
+				
+				var t_k="a";
+				for(var i = 0; i < max; i++)
+					t_k += "a";
+				console.log(t_k);
+				var p_options_text=document.createTextNode(t_k + "\t");
+				//p_options.appendChild(p_options_text);	
+				for(var i=0;i<optionarr.length;i++)
+				{
+					
+					var take=q+optionarr[i];
+
+					if(take in timu)
+					{			
+						var p_options_text=document.createTextNode(timu[take]+"\t");
+						//p_options.appendChild(p_options_text);								
+						var li=document.createElement("li");
+						li.appendChild(p_options_text);
+						li.setAttribute("class","xx_tm_jz");
+						//answer.appendChild(p_options);
+						//div1.appendChild(p_options);
+						ul.appendChild(li);
+					}else{
+						inputnum=i;
+						break;
+					}
+				}
+				
+				div1.appendChild(ul);	
+				x_id=x_id+1;
+				
+			}
+			
+			else if(x_id>2 && q in timu){
+				console.log("xiaotimu loop");
+				console.log(q);
+				console.log("inputnum="+inputnum);
+				var p=document.createElement("p");
+				var text_pp=document.createTextNode(timu[q]);
+				console.log(text_pp.length);
+				p.appendChild(text_pp);
+				var ul2=document.createElement("ul");
+				//var li3=document.createElement("li");
+				//var labell=document.createElement("label");
+				//labell.appendChild(text_pp);
+				//li3.appendChild(labell);
+				//ul2.appendChild(li3);
+								
+				for(i=0;i<inputnum;i++){
+					var input=document.createElement("input");
+					var li2=document.createElement("li");
+					li2.setAttribute("class","tm_tm_jz");
+					input.setAttribute("id",t_id+"_"+x_id);
+					input.setAttribute("name",t_id+"_"+x_id);
+					input.setAttribute("value",selectionarr[zm_id]);
+					input.type="radio";
+					zm_id = zm_id +1;
+					//p.appendChild(input);
+					li2.appendChild(input);
+					ul2.appendChild(li2);
+				}
+				zm_id=0;
+				
+				p.appendChild(ul2);
+				div1.appendChild(p)
+				//answer.appendChild(p);
+		 		x_id = x_id+1;						 				 		
+		 	}
+			
+			else{
+				div1.appendChild(ul2);
+				div1.appendChild(document.createElement("br"));
+				//var fg=document.createElement("h2")
+				var fg_text=document.createTextNode("------------------------------------------------------------------------------------")
+				var p_fg=document.createElement("p");
+				var fg=document.createElement("h2");
+				//var fg_text=document.createTextNode("------------------------------------------------------------------------------------");
+				fg.appendChild(fg_text);
+				p_fg.appendChild(fg);
+				div1.appendChild(p_fg);
+				//fg.appendChild(fg_text);
+				//div1.appendChild(fg);
+				div1.appendChild(document.createElement("br"));
+				answer.appendChild(div1);
+				console.log("next");
+		 		t_id+=1;
+		 		x_id=0;
+			}
+		 	
+		 }
+		
+		 else{
+			console.log("finish")
+			Flag=false;
+		 }
+		 
+		
+		
+	}
+
+	
+	
+</script>
+
+</html>

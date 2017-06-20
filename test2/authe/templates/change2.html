@@ -1,0 +1,996 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>修改问卷</title>		
+		
+		<!-- Fav and touch icons -->
+		<link rel="shortcut icon" href="static/ico/favicon.ico" type="image/x-icon" />    
+
+	    <!-- Css files -->
+	    <link href="/static/css/bootstrap.min.css" rel="stylesheet">		
+		<link href="/static/css/jquery.mmenu.css" rel="stylesheet">		
+		<link href="/static/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/static/css/climacons-font.css" rel="stylesheet">
+		<link href="/static/plugins/xcharts/css/xcharts.min.css" rel=" stylesheet">		
+		<link href="/static/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet">
+		<link href="/static/plugins/morris/css/morris.css" rel="stylesheet">
+		<link href="/static/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+		<link href="/static/plugins/jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">	    
+	    <link href="/static/css/style.min.css" rel="stylesheet">
+		<link href="/static/css/add-ons.min.css" rel="stylesheet">		
+	    <!-- end of header -->
+	</head>
+
+
+<body>
+	<!-- start: Header -->
+	<div class="navbar" role="navigation">
+	
+		<div class="container-fluid">		
+			
+			<ul class="nav navbar-nav navbar-actions navbar-left">
+				<li class="visible-md visible-lg"><a href="index.html#" id="main-menu-toggle"><i class="fa fa-th-large"></i></a></li>
+				<li class="visible-xs visible-sm"><a href="index.html#" id="sidebar-menu"><i class="fa fa-navicon"></i></a></li>			
+			</ul>
+			
+			<form class="navbar-form navbar-left">
+				<button type="submit" class="fa fa-search"></button>
+				<input type="text" class="form-control" placeholder="Search..."></a>
+			</form>
+	        <ul class="nav navbar-nav navbar-right">
+				<li class="dropdown visible-md visible-lg">
+	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i><span class="badge">5</span></a>
+	        		<ul class="dropdown-menu">
+						<li class="dropdown-menu-header">
+							<strong>Messages</strong>
+							<div class="progress thin">
+							  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+							    <span class="sr-only">30% Complete (success)</span>
+							  </div>
+							</div>
+						</li>
+											
+						<li class="dropdown-menu-footer text-center">
+							<a href="page-inbox.html">View all messages</a>
+						</li>	
+	        		</ul>
+	      		</li>
+				<li class="dropdown visible-md visible-lg">
+	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i><span class="badge">3</span></a>
+	        		<ul class="dropdown-menu">
+						<li class="dropdown-menu-header">
+							<strong>Notifications</strong>
+							<div class="progress thin">
+							  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+							    <span class="sr-only">30% Complete (success)</span>
+							  </div>
+							</div>
+						</li>							
+                                               
+						<li class="dropdown-menu-footer text-center">
+							<a href="page-activity.html">View all notification</a>
+						</li>
+	        		</ul>
+	      		</li>
+				<li class="dropdown visible-md visible-lg">
+					 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gears"></i></a>					
+					<ul class="dropdown-menu update-menu" role="menu">
+						<li><a href="#"><i class="fa fa-database"></i> Database </a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-bar-chart-o"></i> Connection </a>
+                        </li>
+						<!--
+                        <li><a href="#"><i class="fa fa-bell"></i> Notification </a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> Message </a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-flash"></i> Traffic </a>
+                        </li>
+						<li><a href="#"><i class="fa fa-credit-card"></i> Invoices </a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-dollar"></i> Finances </a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> Orders </a>
+                        </li>
+						<li><a href="#"><i class="fa fa-folder"></i> Directories </a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-users"></i> Users </a>
+                        </li>	
+						-->
+					</ul>
+				</li>
+				<li class="dropdown visible-md visible-lg">
+	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#e91e63;">{{ username }}</a>
+					<!--jhonsmith@mail.com</a> -->
+	        		<ul class="dropdown-menu">
+						<li class="dropdown-menu-header">
+							<strong>Account</strong>
+						</li>						
+						<li><a href="page-profile.html"><i class="fa fa-user"></i> Profile</a></li>
+						<li><a href="page-login.html"><i class="fa fa-wrench"></i> Settings</a></li>
+						<li><a href="gallery.html"><i class="fa fa-file"></i> File <span class="label label-primary">27</span></a></li>			
+						<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>	
+	        		</ul>
+	      		</li>
+				<li><a href="{% url 'index' %}"><i>前台首页</i></a></li>
+				<li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i></a></li>
+			</ul>
+			
+		</div>
+		
+	</div>
+	<!-- end: Header -->
+	
+	<div class="container-fluid content">
+	
+		<div class="row">
+				
+			<!-- start: Main Menu -->
+			<div class="sidebar ">
+								
+				<div class="sidebar-collapse">
+					<div class="sidebar-header t-center">
+                        <span><i class="fa fa-space-shuttle fa-3x blue"><label><h1>问卷后台</h1></label></i></span>
+                    </div>										
+					<div class="sidebar-menu">						
+						<ul class="nav nav-sidebar">
+							<li><a href="houtai.html"><i class="fa fa-laptop"></i><span class="text"> 用户主页</span></a></li>
+							<li><a href="myques.html"><i class="fa fa-table"></i><span class="text"> 我的问卷</span></a></li>
+							<li><a href="cjwj.html"><i class="fa fa-car"></i><span class="text"> 创建问卷</span></a></li>
+							<li>
+								<a href="#"><i class="fa fa-file-text"></i><span class="text"> 用户设置</span> <span class="fa fa-angle-down pull-right"></span></a>
+								<ul class="nav sub">
+									<li><a href="genggaipw.html"><i class="fa fa-car"></i><span class="text"> 修改密码</span></a></li>				
+								</ul>	
+							</li>
+							<!--
+							<li>
+								<a href="#"><i class="fa fa-list-alt"></i><span class="text"> Forms</span> <span class="fa fa-angle-down pull-right"></span></a>
+								<ul class="nav sub">
+									<li><a href="form-elements.html"><i class="fa fa-indent"></i><span class="text"> Form elements</span></a></li>
+									<li><a href="form-wizard.html"><i class="fa fa-tags"></i><span class="text"> Wizard</span></a></li>
+								</ul>
+							</li>
+							
+							<li>
+								<a href="#"><i class="fa fa-briefcase"></i><span class="text"> UI Features</span> <span class="fa fa-angle-down pull-right"></span></a>
+								<ul class="nav sub">
+									<li><a href="ui-sliders-progress.html"><i class="fa fa-align-left"></i><span class="text"> Progress</span></a></li>
+									<li><a href="ui-nestable-list.html"><i class="fa fa-outdent"></i><span class="text"> Nestable Lists</span></a></li>
+									<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text"> Elements</span></a></li>
+									<li><a href="ui-panels.html"><i class="fa fa-list-alt"></i><span class="text"> Panels</span></a></li>
+									<li><a href="ui-buttons.html"><i class="fa fa-th"></i><span class="text"> Buttons</span></a></li>
+								</ul>
+							</li>
+							
+							<li>
+								<a href="#"><i class="fa fa-bolt"></i><span class="text"> Icons</span> <span class="fa fa-angle-down pull-right"></span></a>
+								<ul class="nav sub">									
+									<li><a href="icons-font-awesome.html"><i class="fa fa-meh-o"></i><span class="text"> Font Awesome</span></a></li>
+									<li><a href="icons-climacons.html"><i class="fa fa-meh-o"></i><span class="text"> Climacons</span></a></li>
+								</ul>
+							</li>
+							-->			
+						</ul>
+					</div>					
+				</div>
+				<div class="sidebar-footer">					
+					
+					<div class="sidebar-brand">
+						
+						<h5>@copy right 2017 by ray</h5>
+					</div>
+					
+					<ul class="sidebar-terms">
+						
+						
+						
+					</ul>
+										
+				</div>	
+				
+			</div>
+			<!-- end: Main Menu -->
+		
+		<!-- start: Content -->
+		<div class="main">
+		
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa-laptop"></i> 用户主页</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="{% url 'houtai' %}">后台首页</a></li>
+						<li><i class="fa fa-laptop"></i>我的问卷</li>
+						<li><i class="fa fa-laptop"></i>修改问卷</li>
+					</ol>
+				</div>
+			</div>
+			
+			
+			
+			
+
+			<div class="row">	
+				<div class="col-lg-3">
+				
+				</div>
+			
+				<div class="col-lg-8 col-lg-12">
+					
+					<div id="answer">
+		
+			
+
+					</div>
+	
+				</div>		
+
+			</div><!--/col-->
+				
+				
+				
+				
+				<div class="col-lg-3 col-md-12">
+					
+					
+				
+				</div><!--/.col-->
+				
+				
+				
+				
+			</div><!--/row-->						
+				
+				
+			
+				
+			<div class="row">			
+				
+				
+				
+				
+					
+			</div><!--/row-->	
+
+			<div class="row">
+				
+				
+				
+				<div class="col-lg-8 col-md-12">
+
+					
+
+				</div><!--/col-->
+				
+			</div><!--/row-->     
+					
+		</div>
+		<!-- end: Content -->
+		<br><br><br>
+		
+		
+				
+		
+	</div><!--/container-->
+		
+		
+	<div class="form3333">
+		
+		<div id="dialog-form" title="修改题目">
+		<p class="validateTips">所有的表单字段都是必填的。</p>
+	 
+			<form method="POST" id="big_answer">
+				<fieldset>
+					<input id="type" name="type" type="text" value="修改">
+					<br>
+					<label for="tg">类型</label>
+					<select id = "select1">
+						<option value="danx">单选</option>
+						<option value="duox">多选</option>
+						<option value="tk">填空</option>
+						<option value="jz">矩阵</option>
+					</select><br><br>
+					<label for="tg">题干</label>
+					<input type="text"  id="tgg" class="text">
+					<p style="color:#FF4500;">注意：如果是修改矩阵题的话，第一行为选项(以空格隔开)，第二行开始是矩阵里面的小问题</p>
+					<p style="color:#FF4500;">再注意：不能把题号.删掉(如1.xxxxx)修改是需要保留1.</p>
+					<label for="xx">选项(以回车键换行为新选项)</label>
+					<textarea id="xxx" rows="5" cols="60 class="text ui-widget-content ui-corner-all"></textarea>
+				</fieldset>
+			</form>
+		</div>
+	
+		<div id="dialog-form2" title="插入题目">
+		<p class="validateTips">所有的表单字段都是必填的。</p>
+	 
+			<form method="POST" id="big_answer">
+				<fieldset>
+					<input id="type2" name="type2" type="text" value="插入">
+					<br>
+					<label for="th">请输入要插入成为的题号</label>
+					<input id="th" name="th"  type="text">
+					<br>
+					<label for="tg">类型</label>
+					<select id = "select_charu">
+						<option value="danx">单选</option>
+						<option value="duox">多选</option>
+						<option value="tk">填空</option>
+						<option value="jz">矩阵</option>
+					</select><br><br>
+					<label for="tg">题干</label>
+					<input type="text"  id="tgg1" class="text">
+					<p style="color:#FF4500;">注意：如果是修改矩阵题的话，第一行为选项(以空格隔开)，第二行开始是矩阵里面的小问题</p>
+					<label for="xx">选项(以回车键换行为新选项)</label>
+					<textarea id="xxx1" rows="5" cols="60 class="text ui-widget-content ui-corner-all"></textarea>
+				</fieldset>
+			</form>
+		</div>
+	
+	
+		<div id="dialog-form3" title="删除题目">
+		<p class="validateTips">你真的确定要删除吗？</p>
+	 
+			<form method="POST" id="big_answer">
+				<fieldset>
+					<input id="type3" name="type3" type="text" value="删除">
+					<br>
+					
+				</fieldset>
+			</form>
+		</div>
+		
+		
+		
+	</div>
+	
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Warning Title</h4>
+				</div>
+				<div class="modal-body">
+					<p>Here settings can be configured...</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div class="clearfix"></div>
+	
+		
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+			<script src="/static/js/jquery-2.1.1.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="/static/js/jquery-1.11.1.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='/static/js/jquery-2.1.1.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<script src="static/js/jquery-1.11.1.min.js"></script>
+    <script src="static/js/jquery-ui.min.js"></script>
+	<link href="static/jquery-ui.css" rel="stylesheet">
+	<script src="/static/js/bootstrap.min.js"></script>	
+	
+	<!-- page scripts -->
+	<script src="/static/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="/static/plugins/touchpunch/jquery.ui.touch-punch.min.js"></script>
+	<script src="/static/plugins/moment/moment.min.js"></script>
+	<script src="/static/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+	<script src="/static/plugins/flot/jquery.flot.min.js"></script>
+	<script src="/static/plugins/flot/jquery.flot.pie.min.js"></script>
+	<script src="/static/plugins/flot/jquery.flot.stack.min.js"></script>
+	<script src="/static/plugins/flot/jquery.flot.resize.min.js"></script>
+	<script src="/static/plugins/flot/jquery.flot.time.min.js"></script>
+	<script src="/static/plugins/flot/jquery.flot.spline.min.js"></script>
+	<script src="/static/plugins/xcharts/js/xcharts.min.js"></script>
+	<script src="/static/plugins/autosize/jquery.autosize.min.js"></script>
+	<script src="/static/plugins/placeholder/jquery.placeholder.min.js"></script>
+	<script src="/static/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="/static/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+	<script src="/static/plugins/raphael/raphael.min.js"></script>
+	<script src="/static/plugins/jvectormap/js/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="/static/plugins/jvectormap/js/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="/static/plugins/jvectormap/js/gdp-data.js"></script>	
+	<script src="/static/plugins/gauge/gauge.min.js"></script>
+	
+	<!-- theme scripts -->
+	<script src="/static/js/SmoothScroll.js"></script>
+	<script src="/static/js/jquery.mmenu.min.js"></script>
+	<script src="/static/plugins/d3/d3.min.js"></script>	
+	
+	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
+     /* 处理表单上传到另外的页面，使用action来进行post数据并且跳转，在html的form元素中进行 */
+	 
+	 var timu={{ timu|safe }};
+     var t_id=1;
+     var x_id=0;
+     var s="id"+t_id+"_"+x_id;	 	 
+	 var answer=document.getElementById("answer"); 
+     var selectionarr=["A","B","C","D","E","F","G","H","I","J","K","L"]
+	 var zm_id=0
+	 var Flag=true;
+	 var br=document.createElement("br");
+	 var qid = "{{id}}";
+
+	 console.log(qid);
+	 console.log(timu);
+	 var t_num = 0;
+	 for(var k in timu)
+	 {
+		if(parseInt(k.split("_")[0].substring(2)) > parseInt(t_num))
+			t_num = (k.split("_")[0].substring(2));
+	 }
+	 for(var i = 0; i < t_num; i++)
+	 {
+		var div_n = document.createElement("div");
+		div_n.setAttribute("id","t" + (i + 1));
+		div_n.setAttribute("class","tm");
+		answer.appendChild(div_n);
+	 }
+	 
+	 while (Flag){
+		
+		if (timu["id"+t_id+"_"+"1"]=="填空"){
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+				title_create(q, "填空");
+		 	}
+		 	else{
+		 		tk_x(q);
+		 	};	
+			
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="单选"){
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+		 		title_create(q, "单选");
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				danx_x(q);
+		 	}
+			
+			else{
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="多选"){
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+				title_create(q, "多选");
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				duox_x(q);
+		 	}
+			
+			else{
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="矩阵"){
+			var q="id"+t_id+"_"+x_id;
+		 	if(x_id==0 && q in timu){
+		 		title_create(q, "矩阵");
+		 	}
+			
+			else if(x_id == 2){
+				jz_b(q);
+			}
+			
+			else if(x_id>2 && q in timu){
+				jz_x(q);
+		 	}
+			
+			else{
+		 		t_id+=1;
+		 		x_id=0;
+			}
+		 }
+		
+		 else{
+			Flag=false;
+		 }
+		 
+		
+		
+	}
+	
+	function tk_x(q)
+	{
+		var p=document.createElement("p");
+		var text_p=document.createTextNode("请输入答案" + "\n");
+		p.appendChild(text_p);
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",t_id);
+		document.getElementById("t"+t_id).appendChild(p);
+		document.getElementById("t"+t_id).appendChild(input);
+		t_id=t_id+1;
+		x_id=0;
+	}
+	
+	function danx_x(q)
+	{
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",t_id);
+		input.setAttribute("value",selectionarr[zm_id]);
+		input.type="radio";
+		var label=document.createElement("label");
+		var text_label=document.createTextNode(timu[q] + "\n");
+		label.appendChild(input);
+		label.appendChild(text_label);
+		document.getElementById("t"+t_id).appendChild(label);
+		x_id = x_id+1;
+		zm_id = zm_id +1;
+	}
+	
+	function duox_x(q)
+	{
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",t_id);
+		input.setAttribute("value",selectionarr[zm_id]);
+		input.type="checkbox";
+		var label=document.createElement("label");
+		var text_label=document.createTextNode(timu[q] + "\n");
+		label.appendChild(input);
+		label.appendChild(text_label);
+		document.getElementById("t"+t_id).appendChild(label);
+		x_id = x_id+1;
+		zm_id = zm_id +1;
+	}
+	
+	function jz_b(q)
+	{
+		var optionarr=["a","b","c","d","e","f","g","h","i","j","k","l"];
+		var p_options=document.createElement("p");
+		var max = 0;
+		for(var i=1;i<10;i++)
+		{
+			var nn = "id"+t_id+"_"+ (x_id + i - '0');
+			if(nn in timu)
+			{
+				max = (max < timu[nn].length)?timu[nn].length:max;
+			}
+		}
+			
+		for(var i=0;i<optionarr.length;i++)
+		{
+			
+			var take=q+optionarr[i];
+
+			if(take in timu)
+			{	
+				var p_options_text=document.createTextNode(timu[take]+"\t");
+				p_options.appendChild(p_options_text);	
+			
+				document.getElementById("t"+t_id).appendChild(p_options);
+			}else{
+				break;
+			}
+			document.getElementById("t"+t_id).appendChild(document.createTextNode("\n"));
+		}
+		
+		x_id=x_id+1;
+	}
+	
+	function jz_x(q)
+	{
+		var p=document.createElement("p");
+		var text_pp=document.createTextNode(timu[q] + "\n");
+		console.log(text_pp.length);
+		p.appendChild(text_pp);
+				
+		for(i=0;i<5;i++){
+			var input=document.createElement("input");
+			input.setAttribute("id",t_id+"_"+x_id);
+			input.setAttribute("name",t_id+"_"+x_id);
+			input.setAttribute("value",selectionarr[zm_id]);
+			input.type="radio";
+			zm_id = zm_id +1;
+			p.appendChild(input);
+		}
+		zm_id=0;
+		document.getElementById("t"+t_id).appendChild(p);
+		x_id = x_id+1;		
+	}
+	
+	
+	
+	function title_create(q, lx)
+	{	
+		
+		var p=document.createElement("p");
+		p.setAttribute("id",t_id);	
+		p.appendChild(document.createTextNode(lx + "\n"));
+		document.getElementById("t"+t_id).appendChild(p);
+		
+
+		var p1=document.createElement("p");
+		p1.setAttribute("id",t_id);
+		p1.appendChild(document.createTextNode(t_id+"."+timu[q] + "\n"));
+		document.getElementById("t"+t_id).appendChild(p1);
+		
+		x_id=x_id+2;
+	}
+	
+	for(var i = 0; i < t_num; i++)
+	{
+		var div_n = document.getElementById("t" + (i + 1));
+		var btn = document.createElement("button");
+		btn.setAttribute("id", "bt" + (i+1)+"bj");
+		//btn.setAttribute("style","visibility:hidden;");
+		btn.appendChild(document.createTextNode("编辑" + "\n"));
+		div_n.appendChild(document.createElement("p"));
+		div_n.appendChild(btn);
+		
+		var btn1 = document.createElement("button");
+		btn1.setAttribute("id", "bt" + (i+1)+"cr");
+		//btn1.setAttribute("style","visibility:hidden;");
+		btn1.appendChild(document.createTextNode("插入" + "\n"));
+		div_n.appendChild(document.createElement("p"));
+		div_n.appendChild(btn1);
+		
+		var btn2 = document.createElement("button");
+		btn2.setAttribute("id", "bt" + (i+1)+"sc");
+		//btn2.setAttribute("style","visibility:hidden;");
+		btn2.appendChild(document.createTextNode("删除" + "\n"));
+		div_n.appendChild(document.createElement("p"));
+		div_n.appendChild(btn2);
+		
+	}
+	
+  var tid = 0;
+  var lbdic = {"danx":"单选", "duox":"多选", "tk":"填空", "jz":"矩阵"};
+ 
+ //对于第一个编辑的dialog的功能添加
+  $(function() {
+	
+    
+	
+	
+	$("#dialog-form ").hover(
+	function(){
+		$("#type").css("visibility","visible");
+	},
+	function(){
+		$("#type").css("visibility","hidden");
+	}
+	
+	);    
+	
+    $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 550,
+      width: 600,
+      modal: true,
+	  
+      buttons: {
+        "修改题目": function() {
+		  var action=$("#type").val();
+          var bValid = true;
+		  var tg = $( "#tgg" ).val();
+		  var xx = $( "#xxx" ).val();
+		  var sel = $("#select1").val();
+		  var th=tg.slice(0,1);
+		  alert(sel);
+		
+		
+		$.ajax({
+             url:"{% url 'teditor' %}",
+             type:'post',
+             data:{"action":action,"xs":xx,"sel":sel,"tg":tg,"th":th, "qid":qid},
+			 //async:false,
+             success: function (arg) {
+			 window.location.reload();
+           }
+		 });  
+		 
+		 
+	
+		  $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+	
+	$("#dialog-form2").hover(
+	  function(){
+		  $("#type2").css("visibility","visible");
+	  },
+	  function(){
+		  $("#type2").css("visibility","hidden");
+	  }
+	  
+	);
+	
+	
+	$( "#dialog-form2" ).dialog({
+      autoOpen: false,
+      height: 650,
+      width: 600,
+      modal: true,
+      buttons: {
+        "插入题目": function() {
+          var bValid = true;
+		  var action=$("#type2").val();
+		  var th=$("#th");
+		  var tg=$("#tgg1");
+		  var xx=$("#xxx1");
+		  var sel = $("#select_charu");
+		  alert(sel.val());
+		  var tg_val=tg.val();
+		  var xx_val=xx.val();
+		  var sel_val=sel.val();
+		  var th_val=th.val();
+		  
+		  console.log(tg_val);
+		  console.log(xx_val);
+		  var xs = xx.val().split("\n");
+		  
+		  $.ajax({
+             url:"{% url 'teditor' %}",
+             type:'post',
+             data:{"action":action,"xs":xx_val,"sel":sel_val,"tg":tg_val,"th":th_val, "qid":qid},
+			 //post 数据对于jq，记得是只能post xx.val()就只能post值，不要直接post元素，会内存溢出
+			 //async:false,
+             success: function (arg) {
+				window.location.reload();
+            }
+		  });  
+		
+		  $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+	
+	$("#dialog-form3").hover(
+	 
+	  function(){
+		   console.log("dialog3-hover-in");
+	  	  $("#type3").css("visibility","visible");
+	  },
+	  function(){
+		  console.log("dialog3-hover-out");
+	  	  $("#type3").css("visibility","hidden");
+	  }
+    );
+
+	$( "#dialog-form3" ).dialog({
+      autoOpen: false,
+      height: 450,
+      width: 400,
+      modal: true,
+      buttons: {
+        "确定要删除吗": function() {
+          var bValid = true;
+		  var action=$("#type3").val();
+		  var tg=$("#tgg").val();
+		  
+		  
+		  $.ajax({
+             url:"{% url 'teditor' %}",
+             type:'post',
+             data:{"action":action,"tg":tg, "qid":qid},
+			 //async:false,
+             success: function (arg) {
+				window.location.reload();
+			}
+		  });  
+		  
+		  
+		  $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+   
+    
+  });
+  
+  
+  //对于第二个编辑的dialog（插入问题）的功能添加
+  $(function() {
+	
+    var th=$("#th");
+    var tg = $( "#tgg" );
+    var xx = $( "#xxx" );
+	var sel = $("#select");
+	
+	
+	
+ 
+    
+ 
+    
+	
+	
+  });
+  
+  
+  //对于第三个编辑的dialog（删除问题）的功能添加
+  $(function() {
+      
+	
+	
+	  
+	
+ 
+    
+	
+	
+	
+   
+   });
+  
+  
+$(document).ready(function(){
+
+    var len = $(".tm").size();
+    var arr = [];
+	console.log(len);
+    for(var index = 0; index < len; index++){//创建一个数字数组
+		arr[index] = index;
+	}
+	
+	$.each(arr, function(i){//循环得到不同的id的值
+		var idValue = $(".tm").eq(i).attr("id");
+		if(idValue != ''){
+			
+			$("#" + idValue).hover(
+			  function(){
+					$("#b"+idValue).css("visibility","visible");
+				},
+			  function(){
+					$("#b"+idValue).css("visibility","hidden");
+			});
+			
+			$( "#b"+idValue+"bj").button().click(function() {
+				$( "#dialog-form" ).dialog( "open" );
+				tid = idValue.substring(1);
+				
+				var lab = $("#" + idValue).text().split("\n");//把div中的所有文字放进去lab变量里面
+				console.log(lab);
+				var s = "";
+				console.log($.trim(lab[0]));
+				if($.trim(lab[0]) == "单选")
+					$("#select").val("danx");
+				else if($.trim(lab[0]) == "多选")
+					$("#select").val("duox");
+				else if($.trim(lab[0]) == "填空")
+					$("#select").val("tk");
+				else if($.trim(lab[0]) == "矩阵")
+					$("#select").val("jz");
+						
+				$("#tgg").val($.trim(lab[1]));
+				
+			
+				
+				for(var i = 2; i < lab.length - 4; i++)
+					if($.trim(lab[i]) != "")
+						s += $.trim(lab[i]) + "\n"; 
+			
+				//上面由单选开始到s+=这里，分别功能为1.判断题型（并把题型参数放进去dialog中）；2.把题目放进去dialog中  3.s+=这里是把选项全部变成字符串
+				
+				console.log(s);
+				$("#xxx").val(s);
+				
+				
+			 });
+			 
+			 
+			 $( "#b"+idValue+"cr").button().click(function() {
+				$( "#dialog-form2" ).dialog( "open" );
+				tid = idValue.substring(1);
+				
+				var lab = $("#" + idValue).text().split("\n");
+				console.log(lab);
+				var s = "";
+				/*
+				console.log($.trim(lab[0]));
+				if($.trim(lab[0]) == "单选")
+					$("#select").val("danx");
+				else if($.trim(lab[0]) == "多选")
+					$("#select").val("duox");
+				else if($.trim(lab[0]) == "填空")
+					$("#select").val("tk");
+				else if($.trim(lab[0]) == "矩阵")
+					$("#select").val("jz");
+						
+				$("#tgg").val($.trim(lab[1]));
+				
+				for(var i = 2; i < lab.length - 4; i++)
+					if($.trim(lab[i]) != "")
+						s += $.trim(lab[i]) + "\n"; 
+				
+				console.log(s);
+				$("#xxx").val(s);
+				*/
+				
+			 });
+			 
+			 $( "#b"+idValue+"sc").button().click(function() {
+				$( "#dialog-form3" ).dialog( "open" );
+				tid = idValue.substring(1);
+				
+				var lab = $("#" + idValue).text().split("\n");
+				console.log(lab);
+				var s = "";
+				/*
+				console.log($.trim(lab[0]));
+				if($.trim(lab[0]) == "单选")
+					$("#select").val("danx");
+				else if($.trim(lab[0]) == "多选")
+					$("#select").val("duox");
+				else if($.trim(lab[0]) == "填空")
+					$("#select").val("tk");
+				else if($.trim(lab[0]) == "矩阵")
+					$("#select").val("jz");
+				*/		
+				$("#tgg").val($.trim(lab[1]));
+				
+				/*
+				for(var i = 2; i < lab.length - 2; i++)
+					if($.trim(lab[i]) != "")
+						s += $.trim(lab[i]) + "\n"; 
+				*/
+				console.log(s);
+				$("#xxx").val(s);
+				
+				
+			 });
+			
+		}
+	});
+	
+});
+
+	
+	
+</script>
+	
+	<!-- end: JavaScript-->
+	
+</body>
+</html>

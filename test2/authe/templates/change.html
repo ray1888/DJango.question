@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+	
+<body>
+	
+    <form method="POST" id="big_answer" action="txcg.html">
+        <div id="answer">
+
+			
+
+        </div>
+		<input type="submit" value="submit">提交修改</input>
+    </form>
+	
+	
+</body>
+
+<script type="text/javascript">
+     /* 处理表单上传到另外的页面，使用action来进行post数据并且跳转，在html的form元素中进行 */
+	 var timu={{ timu|safe }};
+     var t_id=1;
+     var x_id=0;
+     var s="id"+t_id+"."+x_id;	 	 
+	 var answer=document.getElementById("answer"); 
+     var selectionarr=["A","B","C","D","E","F","G","H","I","J","K","L"]
+	 var zm_id=0
+	 var Flag=true;
+	 var br=document.createElement("br");
+
+	 console.log(timu);
+	 
+	 while (Flag){
+		if (timu["id"+t_id+"."+"1"]=="填空"){
+			var q="id"+t_id+"."+x_id;
+		 	if (x_id==0){
+				title_create(q, "填空");
+		 	}
+		 	else{
+		 		tk_x(q);
+		 	};	
+		 }
+		 
+		else if(timu["id"+t_id+"."+"1"]=="单选"){
+			var q="id"+t_id+"."+x_id;
+		 	if (x_id==0){
+		 		title_create(q, "单选");
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				danx_x(q);
+		 	}
+			
+			else{
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"."+"1"]=="多选"){
+			var q="id"+t_id+"."+x_id;
+		 	if (x_id==0){
+				title_create(q, "多选");
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				duox_x(q);
+		 	}
+			
+			else{
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"."+"1"]=="矩阵"){
+			var q="id"+t_id+"."+x_id;
+		 	if(x_id==0 && q in timu){
+		 		title_create(q, "矩阵");
+		 	}
+			
+			else if(x_id == 2){
+				jz_b(q);
+			}
+			
+			else if(x_id>2 && q in timu){
+				jz_x(q);
+		 	}
+			
+			else{
+		 		t_id+=1;
+		 		x_id=0;
+			}
+		 	
+		 }
+		
+		 else{
+			Flag=false;
+		 }
+		 
+		
+		
+	}
+	
+	function tk_x(q)
+	{
+		var p=document.createElement("p");
+		var p1=document.createElement("p");
+		var text_p=document.createTextNode("请输入答案");
+		p.appendChild(text_p);
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",q);
+		p1.appendChild(input);
+		answer.appendChild(p);
+		answer.appendChild(p1);
+		t_id=t_id+1;
+		x_id=0;
+	}
+	
+	function danx_x(q)
+	{
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",q);
+		input.setAttribute("value",timu[q]);
+		input.type="text";
+		var p=document.createElement("p");
+				
+		p.appendChild(input);
+		answer.appendChild(p);
+		x_id = x_id+1;
+		zm_id = zm_id +1;
+	}
+	
+	function duox_x(q)
+	{
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",q);
+		input.setAttribute("value",timu[q]);
+		input.type="text";
+		var p=document.createElement("p");
+						
+		p.appendChild(input);
+		answer.appendChild(p);
+		x_id = x_id+1;
+		zm_id = zm_id +1;
+	}
+	
+	function jz_b(q)
+	{
+		var optionarr=["a","b","c","d","e","f","g","h","i","j","k","l"];
+		var p_options=document.createElement("p");
+		var max = 0;
+		for(var i=1;i<10;i++)
+		{
+			var nn = "id"+t_id+"."+ (x_id + i - '0');
+			if(nn in timu)
+			{
+				max = (max < timu[nn].length)?timu[nn].length:max;
+			}
+		}
+			
+		for(var i=0;i<optionarr.length;i++)
+		{
+			
+			var take=q+optionarr[i];
+
+			if(take in timu)
+			{	
+				var input = document.createElement("input");
+				input.setAttribute("id",t_id);
+				input.setAttribute("name",take);
+				input.setAttribute("value",timu[take]);
+				input.type="text";
+			
+				answer.appendChild(input);
+			}else{
+				break;
+			}
+		}
+		
+		x_id=x_id+1;
+	}
+	
+	function jz_x(q)
+	{
+		var p=document.createElement("p");
+		var input = document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",q);
+		input.setAttribute("value",timu[q]);
+		input.type="text";
+		p.appendChild(input);
+				
+		for(i=0;i<5;i++){
+			var input=document.createElement("input");
+			input.setAttribute("id",t_id+"."+x_id);
+			input.setAttribute("name",t_id+"."+x_id);
+			input.setAttribute("value",selectionarr[zm_id]);
+			input.type="radio";
+			zm_id = zm_id +1;
+			p.appendChild(input);
+		}
+		zm_id=0;
+		answer.appendChild(p);
+		x_id = x_id+1;		
+	}
+	
+	
+	
+	function title_create(q, lx)
+	{	
+		
+		var p1=document.createElement("p");
+		var input1=document.createElement("input");
+		input1.setAttribute("id",t_id);
+		input1.setAttribute("name","id"+t_id+".1");
+		input1.setAttribute("value", lx);
+		input1.type="text";
+		p1.appendChild(document.createTextNode("第" + t_id + "题"));
+		p1.appendChild(input1);
+		answer.appendChild(p1);
+		
+		var p=document.createElement("p");
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",q);
+		input.setAttribute("value",timu[q]);
+		input.type="text";
+		p.appendChild(document.createTextNode("题干："));
+		p.appendChild(input);
+		answer.appendChild(p);
+		
+		x_id=x_id+2;
+	}
+
+	
+	
+</script>
+
+</html>

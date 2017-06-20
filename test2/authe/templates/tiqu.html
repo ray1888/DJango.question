@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提取问卷</title>
+</head>
+    {% include 'header.html' %}
+    <body>
+        <br>
+        <br>
+        {% for item in qnlist %}
+        <h1 style="color: #FFECF5;"><a href="xuanran.html?qname={{  item  }} ">{{  item  }}</a></h1>
+            <br>
+			<a href="editor.html?qname={{  item  }} ">修改问卷</a>
+        {% endfor %}
+    </body>
+
+    {% include 'foot.html' %}
+</html>

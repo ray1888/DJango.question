@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>问卷系统：首页</title>
+	<script src="/static/js/jquery-1.11.1.min.js"></script>
+     <!--BOOTSTRAP SCRIPTS PLUGIN-->
+	<script src="/static/js/bootstrap.js"></script>
+     <!--WOW SCRIPTS PLUGIN-->
+    <script src="/static/js/wow.js"></script>
+     <!--FLEXSLIDER SCRIPTS PLUGIN-->
+    <script src="/static/js/jquery.flexslider.js"></script>
+     <!--CUSTOM SCRIPTS -->
+    <script src="/static/js/custom.js"></script>
+	
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="/static/css/index2/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME STYLE  -->
+    <link href="/static/css/index2/font-awesome.css" rel="stylesheet" />
+    <!-- ANIMATE STYLE  -->
+    <link href="/static/css/index2/animate.css" rel="stylesheet" />
+    <!-- FLEXSLIDER STYLE  -->
+    <link href="/static/css/index2/flexslider.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="/static/css/index2/style.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS  -->
+    <link href='/static/css/index2/google_font.css' rel='stylesheet' type='text/css' />
+    <link href='/static/css/index2/google_font1.css' rel='stylesheet' type='text/css' />
+	<link href='/static/css/index2/google_font2.css' rel='stylesheet' type='text/css' /> 
+	
+	
+</head>
+<body>
+
+ <div class="navbar navbar-inverse set-radius-zero" >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+                    <h1>问卷系统</h1>
+
+            </div>
+            <div class="right-div">
+				<strong>Support : </strong>  xxx@qq.com
+            </div>
+          
+        </div>
+    </div>
+    <!-- LOGO HEADER END-->
+    <section class="menu-section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                            <li><a href="{% url 'index' %}" >首页</a></li>
+                            <li><a href="{% url 'signin' %}">登陆</a></li>        
+                             <li><a href="{% url 'signup' %}">注册</a></li>
+                            <li><a href="{% url 'contact' %}">联系我们</a></li>
+							<li><a href="{% url 'tiqu' %}">查看正在调查的问卷</a></li>
+							{% if  username %}
+							<li><a href="" style="color:#e91e63;">您好!{{ username }}</a></li>		
+							<li><a href="{% url 'houtai' %}">管理后台</a></li>
+							<li><a href="{% url 'logout' %}">登出</a></li>
+							{% endif %}
+                            
+							
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+     <!-- MENU SECTION END-->
+    <div id="slideshow-sec">
+       
+    </div>
+    <!-- SLIDESHOW SECTION END-->
+   
+    <!-- BELOW SLIDESHOW SECTION END-->
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="jumbotron">
+					<h1>你已经成功填写问卷</h1>
+					<strong><a href="{% url 'index' %}">回到首页</a></strong>
+					<hr />
+				</div>
+            </div>
+        </div>
+		
+		<div class="row">
+			<h1>感谢您使用我们的问卷系统</h1>
+		</div>
+		
+		
+		
+      </div>
+     <!-- TAG HOME SECTION END-->            
+    
+     <!-- PARALLAX LIKE SECTION END-->
+     
+      <!--SET-DIV SECTION END-->
+   
+   <div class="footer-sec">
+	 <div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="txt-block">
+
+                <i class="fa fa-lastfm fa-4x"></i>
+									<h4>界面使用简单</h4>
+									<p >
+										Made BY real 广工  Using   twttier tech
+									</p>
+                      </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="txt-block">
+
+              
+                <i class="fa fa-yelp fa-4x"></i>
+									<h4>技术支持</h4>
+									<p >
+										可以通过某某宝进行付费(其实并没有)
+									</p>
+                      </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="txt-block">
+
+              
+                <i class="fa fa-ioxhost fa-4x"></i>
+									<h4>多用途</h4>
+									<p >
+										使用通用的设计，使得用系统创建问卷的人是多元化的
+									</p>
+                      </div>
+            </div>
+		</div>
+		
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+              
+									<h3> <strong>关于本站</strong> </h3>
+									<p style="padding-right:50px;" >
+										并没有什么想说的
+									</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 social-div">
+               
+
+              
+										<h3> <strong>以后可能会放上二维码</strong> </h3>
+                We love to be social,Catch Us On Wechat
+                
+									
+                    
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <h3> <strong>2017年度巨作</strong> </h3>
+                
+            </div>
+        </div>
+		<div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <hr />
+                <div style="text-align:right;padding:5px;">
+                    &copy;2017 by real_ray 
+                </div>
+            </div>
+		</div>
+	  </div>
+   </div>
+     <!--FOOTER SECTION END-->
+      <!-- WE PUT SCRIPTS AT THE END TO LOAD PAGE FASTER-->
+     <!--CORE SCRIPTS PLUGIN-->
+    
+</body>
+
+</html>

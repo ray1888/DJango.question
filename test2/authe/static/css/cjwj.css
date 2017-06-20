@@ -1,0 +1,12 @@
+.tm {
+	border: dotted #C5C1AA;
+	border-width:55px;
+	padding:50px;
+	margin:2px;
+}
+
+.input-group button {
+	margin:5px;
+	float:left;
+}
+

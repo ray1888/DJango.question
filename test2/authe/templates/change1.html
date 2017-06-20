@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	
+	
+	<script src="static/js/jquery-1.11.1.min.js"></script>
+    <!--script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script-->
+	
+    <script src="static/js/jquery-ui.min.js"></script>
+	<link href="static/jquery-ui.css" rel="stylesheet">
+	
+</head>
+  <style>
+    body { font-size: 92.5%; }
+    input.text { margin-bottom:16px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+
+ </style>
+	
+<body>
+
+	<div id="dialog-form" title="修改题目">
+	<p class="validateTips">所有的表单字段都是必填的。</p>
+	 
+		<form method="POST" id="big_answer">
+			<fieldset>
+				<input id="type" name="type" type="text" value="修改">
+				<br>
+				<label for="tg">类型</label>
+				<select id = "select1">
+					<option value="danx">单选</option>
+					<option value="duox">多选</option>
+					<option value="tk">填空</option>
+					<option value="jz">矩阵</option>
+				</select><br><br>
+				<label for="tg">题干</label>
+				<input type="text"  id="tgg" class="text">
+				<label for="xx">选项(以回车键换行为新选项)</label>
+				<textarea id="xxx" rows="5" cols="60 class="text ui-widget-content ui-corner-all"></textarea>
+			</fieldset>
+		</form>
+	</div>
+	
+	<div id="dialog-form2" title="插入题目">
+	<p class="validateTips">所有的表单字段都是必填的。</p>
+	 
+		<form method="POST" id="big_answer">
+			<fieldset>
+				<input id="type2" name="type2" type="text" value="插入">
+				<br>
+				<label for="th">请输入要插入成为的题号</label>
+				<input id="th" name="th"  type="text">
+				<br>
+				<label for="tg">类型</label>
+				<select id = "select_charu">
+					<option value="danx">单选</option>
+					<option value="duox">多选</option>
+					<option value="tk">填空</option>
+					<option value="jz">矩阵</option>
+				</select><br><br>
+				<label for="tg">题干</label>
+				<input type="text"  id="tgg1" class="text">
+				<label for="xx">选项(以回车键换行为新选项)</label>
+				<textarea id="xxx1" rows="5" cols="60 class="text ui-widget-content ui-corner-all"></textarea>
+			</fieldset>
+		</form>
+	</div>
+	
+	
+	<div id="dialog-form3" title="删除题目">
+	<p class="validateTips">你真的确定要删除吗？</p>
+	 
+		<form method="POST" id="big_answer">
+			<fieldset>
+				<input id="type3" name="type3" type="text" value="删除">
+				<br>
+				
+			</fieldset>
+		</form>
+	</div>
+	
+    
+	<div id="answer">
+		
+			
+
+	</div>
+		
+	
+	
+</body>
+
+<script type="text/javascript">
+     /* 处理表单上传到另外的页面，使用action来进行post数据并且跳转，在html的form元素中进行 */
+	 
+	 var timu={{ timu|safe }};
+     var t_id=1;
+     var x_id=0;
+     var s="id"+t_id+"_"+x_id;	 	 
+	 var answer=document.getElementById("answer"); 
+     var selectionarr=["A","B","C","D","E","F","G","H","I","J","K","L"]
+	 var zm_id=0
+	 var Flag=true;
+	 var br=document.createElement("br");
+	 var qid = "{{id}}";
+
+	 console.log(qid);
+	 console.log(timu);
+	 var t_num = 0;
+	 for(var k in timu)
+	 {
+		if(parseInt(k.split("_")[0].substring(2)) > parseInt(t_num))
+			t_num = (k.split("_")[0].substring(2));
+	 }
+	 for(var i = 0; i < t_num; i++)
+	 {
+		var div_n = document.createElement("div");
+		div_n.setAttribute("id","t" + (i + 1));
+		div_n.setAttribute("class","tm");
+		answer.appendChild(div_n);
+	 }
+	 
+	 while (Flag){
+		
+		if (timu["id"+t_id+"_"+"1"]=="填空"){
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+				title_create(q, "填空");
+		 	}
+		 	else{
+		 		tk_x(q);
+		 	};	
+			
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="单选"){
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+		 		title_create(q, "单选");
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				danx_x(q);
+		 	}
+			
+			else{
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="多选"){
+			var q="id"+t_id+"_"+x_id;
+		 	if (x_id==0){
+				title_create(q, "多选");
+		 	}
+			
+		 	else if (q in timu && x_id>1){
+				duox_x(q);
+		 	}
+			
+			else{
+		 			t_id+=1;
+		 			x_id=0;
+					zm_id=0;
+		 	};
+		 	
+		 }
+		 
+		else if(timu["id"+t_id+"_"+"1"]=="矩阵"){
+			var q="id"+t_id+"_"+x_id;
+		 	if(x_id==0 && q in timu){
+		 		title_create(q, "矩阵");
+		 	}
+			
+			else if(x_id == 2){
+				jz_b(q);
+			}
+			
+			else if(x_id>2 && q in timu){
+				jz_x(q);
+		 	}
+			
+			else{
+		 		t_id+=1;
+		 		x_id=0;
+			}
+		 }
+		
+		 else{
+			Flag=false;
+		 }
+		 
+		
+		
+	}
+	
+	function tk_x(q)
+	{
+		var p=document.createElement("p");
+		var text_p=document.createTextNode("请输入答案" + "\n");
+		p.appendChild(text_p);
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",t_id);
+		document.getElementById("t"+t_id).appendChild(p);
+		document.getElementById("t"+t_id).appendChild(input);
+		t_id=t_id+1;
+		x_id=0;
+	}
+	
+	function danx_x(q)
+	{
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",t_id);
+		input.setAttribute("value",selectionarr[zm_id]);
+		input.type="radio";
+		var label=document.createElement("label");
+		var text_label=document.createTextNode(timu[q] + "\n");
+		label.appendChild(input);
+		label.appendChild(text_label);
+		document.getElementById("t"+t_id).appendChild(label);
+		x_id = x_id+1;
+		zm_id = zm_id +1;
+	}
+	
+	function duox_x(q)
+	{
+		var input=document.createElement("input");
+		input.setAttribute("id",t_id);
+		input.setAttribute("name",t_id);
+		input.setAttribute("value",selectionarr[zm_id]);
+		input.type="checkbox";
+		var label=document.createElement("label");
+		var text_label=document.createTextNode(timu[q] + "\n");
+		label.appendChild(input);
+		label.appendChild(text_label);
+		document.getElementById("t"+t_id).appendChild(label);
+		x_id = x_id+1;
+		zm_id = zm_id +1;
+	}
+	
+	function jz_b(q)
+	{
+		var optionarr=["a","b","c","d","e","f","g","h","i","j","k","l"];
+		var p_options=document.createElement("p");
+		var max = 0;
+		for(var i=1;i<10;i++)
+		{
+			var nn = "id"+t_id+"_"+ (x_id + i - '0');
+			if(nn in timu)
+			{
+				max = (max < timu[nn].length)?timu[nn].length:max;
+			}
+		}
+			
+		for(var i=0;i<optionarr.length;i++)
+		{
+			
+			var take=q+optionarr[i];
+
+			if(take in timu)
+			{	
+				var p_options_text=document.createTextNode(timu[take]+"\t");
+				p_options.appendChild(p_options_text);	
+			
+				document.getElementById("t"+t_id).appendChild(p_options);
+			}else{
+				break;
+			}
+			document.getElementById("t"+t_id).appendChild(document.createTextNode("\n"));
+		}
+		
+		x_id=x_id+1;
+	}
+	
+	function jz_x(q)
+	{
+		var p=document.createElement("p");
+		var text_pp=document.createTextNode(timu[q] + "\n");
+		console.log(text_pp.length);
+		p.appendChild(text_pp);
+				
+		for(i=0;i<5;i++){
+			var input=document.createElement("input");
+			input.setAttribute("id",t_id+"_"+x_id);
+			input.setAttribute("name",t_id+"_"+x_id);
+			input.setAttribute("value",selectionarr[zm_id]);
+			input.type="radio";
+			zm_id = zm_id +1;
+			p.appendChild(input);
+		}
+		zm_id=0;
+		document.getElementById("t"+t_id).appendChild(p);
+		x_id = x_id+1;		
+	}
+	
+	
+	
+	function title_create(q, lx)
+	{	
+		
+		var p=document.createElement("p");
+		p.setAttribute("id",t_id);	
+		p.appendChild(document.createTextNode(lx + "\n"));
+		document.getElementById("t"+t_id).appendChild(p);
+		
+
+		var p1=document.createElement("p");
+		p1.setAttribute("id",t_id);
+		p1.appendChild(document.createTextNode(t_id+"."+timu[q] + "\n"));
+		document.getElementById("t"+t_id).appendChild(p1);
+		
+		x_id=x_id+2;
+	}
+	
+	for(var i = 0; i < t_num; i++)
+	{
+		var div_n = document.getElementById("t" + (i + 1));
+		var btn = document.createElement("button");
+		btn.setAttribute("id", "bt" + (i+1)+"bj");
+		//btn.setAttribute("style","visibility:hidden;");
+		btn.appendChild(document.createTextNode("编辑" + "\n"));
+		div_n.appendChild(document.createElement("p"));
+		div_n.appendChild(btn);
+		
+		var btn1 = document.createElement("button");
+		btn1.setAttribute("id", "bt" + (i+1)+"cr");
+		//btn1.setAttribute("style","visibility:hidden;");
+		btn1.appendChild(document.createTextNode("插入" + "\n"));
+		div_n.appendChild(document.createElement("p"));
+		div_n.appendChild(btn1);
+		
+		var btn2 = document.createElement("button");
+		btn2.setAttribute("id", "bt" + (i+1)+"sc");
+		//btn2.setAttribute("style","visibility:hidden;");
+		btn2.appendChild(document.createTextNode("删除" + "\n"));
+		div_n.appendChild(document.createElement("p"));
+		div_n.appendChild(btn2);
+		
+	}
+	
+  var tid = 0;
+  var lbdic = {"danx":"单选", "duox":"多选", "tk":"填空", "jz":"矩阵"};
+ 
+ //对于第一个编辑的dialog的功能添加
+  $(function() {
+	
+    
+	
+	
+	$("#dialog-form ").hover(
+	function(){
+		$("#type").css("visibility","visible");
+	},
+	function(){
+		$("#type").css("visibility","hidden");
+	}
+	
+	);    
+	
+    $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 550,
+      width: 600,
+      modal: true,
+	  
+      buttons: {
+        "修改题目": function() {
+		  var action=$("#type").val();
+          var bValid = true;
+		  var tg = $( "#tgg" ).val();
+		  var xx = $( "#xxx" ).val();
+		  var sel = $("#select1").val();
+		  var th=tg.slice(0,1);
+		  alert(sel);
+		
+		
+		$.ajax({
+             url:"teditor",
+             type:'post',
+             data:{"action":action,"xs":xx,"sel":sel,"tg":tg,"th":th, "qid":qid},
+			 async:false,
+             success: function (arg) {
+           }
+		 });  
+		 
+		 
+	
+		  $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+	
+	$("#dialog-form2").hover(
+	  function(){
+		  $("#type2").css("visibility","visible");
+	  },
+	  function(){
+		  $("#type2").css("visibility","hidden");
+	  }
+	  
+	);
+	
+	
+	$( "#dialog-form2" ).dialog({
+      autoOpen: false,
+      height: 650,
+      width: 600,
+      modal: true,
+      buttons: {
+        "插入题目": function() {
+          var bValid = true;
+		  var action=$("#type2").val();
+		  var th=$("#th");
+		  var tg=$("#tgg1");
+		  var xx=$("#xxx1");
+		  var sel = $("#select_charu");
+		  alert(sel.val());
+		  var tg_val=tg.val();
+		  var xx_val=xx.val();
+		  var sel_val=sel.val();
+		  var th_val=th.val();
+		  
+		  console.log(tg_val);
+		  console.log(xx_val);
+		  var xs = xx.val().split("\n");
+		  
+		  $.ajax({
+             url:"teditor",
+             type:'post',
+             data:{"action":action,"xs":xx_val,"sel":sel_val,"tg":tg_val,"th":th_val, "qid":qid},
+			 //post 数据对于jq，记得是只能post xx.val()就只能post值，不要直接post元素，会内存溢出
+			 async:false,
+             success: function (arg) {
+            }
+		  });  
+		
+		  $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+	
+	$("#dialog-form3").hover(
+	 
+	  function(){
+		   console.log("dialog3-hover-in");
+	  	  $("#type3").css("visibility","visible");
+	  },
+	  function(){
+		  console.log("dialog3-hover-out");
+	  	  $("#type3").css("visibility","hidden");
+	  }
+    );
+
+	$( "#dialog-form3" ).dialog({
+      autoOpen: false,
+      height: 450,
+      width: 400,
+      modal: true,
+      buttons: {
+        "确定要删除吗": function() {
+          var bValid = true;
+		  var action=$("#type3").val();
+		  var tg=$("#tgg").val();
+		  
+		  
+		  $.ajax({
+             url:"teditor",
+             type:'post',
+             data:{"action":action,"tg":tg, "qid":qid},
+			 async:false,
+             success: function (arg) {
+            }
+		  });  
+		  
+		  
+		  $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+   
+    
+  });
+  
+  
+  //对于第二个编辑的dialog（插入问题）的功能添加
+  $(function() {
+	
+    var th=$("#th");
+    var tg = $( "#tgg" );
+    var xx = $( "#xxx" );
+	var sel = $("#select");
+	
+	
+	
+ 
+    
+ 
+    
+	
+	
+  });
+  
+  
+  //对于第三个编辑的dialog（删除问题）的功能添加
+  $(function() {
+      
+	
+	
+	  
+	
+ 
+    
+	
+	
+	
+   
+   });
+  
+  
+$(document).ready(function(){
+
+    var len = $(".tm").size();
+    var arr = [];
+	console.log(len);
+    for(var index = 0; index < len; index++){//创建一个数字数组
+		arr[index] = index;
+	}
+	
+	$.each(arr, function(i){//循环得到不同的id的值
+		var idValue = $(".tm").eq(i).attr("id");
+		if(idValue != ''){
+			
+			$("#" + idValue).hover(
+			  function(){
+					$("#b"+idValue).css("visibility","visible");
+				},
+			  function(){
+					$("#b"+idValue).css("visibility","hidden");
+			});
+			
+			$( "#b"+idValue+"bj").button().click(function() {
+				$( "#dialog-form" ).dialog( "open" );
+				tid = idValue.substring(1);
+				
+				var lab = $("#" + idValue).text().split("\n");//把div中的所有文字放进去lab变量里面
+				console.log(lab);
+				var s = "";
+				console.log($.trim(lab[0]));
+				if($.trim(lab[0]) == "单选")
+					$("#select").val("danx");
+				else if($.trim(lab[0]) == "多选")
+					$("#select").val("duox");
+				else if($.trim(lab[0]) == "填空")
+					$("#select").val("tk");
+				else if($.trim(lab[0]) == "矩阵")
+					$("#select").val("jz");
+						
+				$("#tgg").val($.trim(lab[1]));
+				
+			
+				
+				for(var i = 2; i < lab.length - 4; i++)
+					if($.trim(lab[i]) != "")
+						s += $.trim(lab[i]) + "\n"; 
+			
+				//上面由单选开始到s+=这里，分别功能为1.判断题型（并把题型参数放进去dialog中）；2.把题目放进去dialog中  3.s+=这里是把选项全部变成字符串
+				
+				console.log(s);
+				$("#xxx").val(s);
+				
+				
+			 });
+			 
+			 
+			 $( "#b"+idValue+"cr").button().click(function() {
+				$( "#dialog-form2" ).dialog( "open" );
+				tid = idValue.substring(1);
+				
+				var lab = $("#" + idValue).text().split("\n");
+				console.log(lab);
+				var s = "";
+				/*
+				console.log($.trim(lab[0]));
+				if($.trim(lab[0]) == "单选")
+					$("#select").val("danx");
+				else if($.trim(lab[0]) == "多选")
+					$("#select").val("duox");
+				else if($.trim(lab[0]) == "填空")
+					$("#select").val("tk");
+				else if($.trim(lab[0]) == "矩阵")
+					$("#select").val("jz");
+						
+				$("#tgg").val($.trim(lab[1]));
+				
+				for(var i = 2; i < lab.length - 4; i++)
+					if($.trim(lab[i]) != "")
+						s += $.trim(lab[i]) + "\n"; 
+				
+				console.log(s);
+				$("#xxx").val(s);
+				*/
+				
+			 });
+			 
+			 $( "#b"+idValue+"sc").button().click(function() {
+				$( "#dialog-form3" ).dialog( "open" );
+				tid = idValue.substring(1);
+				
+				var lab = $("#" + idValue).text().split("\n");
+				console.log(lab);
+				var s = "";
+				/*
+				console.log($.trim(lab[0]));
+				if($.trim(lab[0]) == "单选")
+					$("#select").val("danx");
+				else if($.trim(lab[0]) == "多选")
+					$("#select").val("duox");
+				else if($.trim(lab[0]) == "填空")
+					$("#select").val("tk");
+				else if($.trim(lab[0]) == "矩阵")
+					$("#select").val("jz");
+				*/		
+				$("#tgg").val($.trim(lab[1]));
+				
+				/*
+				for(var i = 2; i < lab.length - 2; i++)
+					if($.trim(lab[i]) != "")
+						s += $.trim(lab[i]) + "\n"; 
+				*/
+				console.log(s);
+				$("#xxx").val(s);
+				
+				
+			 });
+			
+		}
+	});
+	
+});
+
+	
+	
+</script>
+
+</html>
